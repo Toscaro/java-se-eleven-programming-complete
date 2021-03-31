@@ -1,0 +1,4 @@
+To verify java installation, simple run the following commands on terminal (tested on JDK 11):
+
+java -version
+javac
