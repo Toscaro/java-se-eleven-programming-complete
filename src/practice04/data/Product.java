@@ -1,4 +1,4 @@
-package practice04.practice04_1.data;
+package practice04.data;
 
 import java.math.BigDecimal;
 

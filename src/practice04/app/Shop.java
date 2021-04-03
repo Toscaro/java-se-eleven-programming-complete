@@ -1,6 +1,6 @@
-package practice04.practice04_1.app;
+package practice04.app;
 
-import practice04.practice04_1.data.Product;
+import practice04.data.Product;
 
 import java.math.BigDecimal;
 
