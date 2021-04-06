@@ -27,10 +27,12 @@ public class Shop {
         Product p2 = new Product(102, "Coffee", BigDecimal.valueOf(1.99), Rating.FOUR_STAR);
         Product p3 = new Product(103, "Cake", BigDecimal.valueOf(3.99), Rating.FIVE_STAR);
         Product p4 = new Product();
+        Product p5 = p3.applyRating(Rating.THREE_STAR);
 
         System.out.println(p1);
         System.out.println(p2);
         System.out.println(p3);
         System.out.println(p4);
+        System.out.println(p5);
     }
 }
