@@ -1,4 +1,4 @@
-package practice01.practice01_2;
+package introduction.practice01.practice01_2;
 
 public class HelloWorld {
     public static void main(String[] args) {

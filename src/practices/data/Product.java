@@ -6,7 +6,7 @@
  * Vestibulum commodo. Ut rhoncus gravida arcu.
  */
 
-package practice04.data;
+package practices.data;
 
 import java.math.BigDecimal;
 import java.math.RoundingMode;

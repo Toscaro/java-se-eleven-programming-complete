@@ -1,4 +1,4 @@
-package practice02.practice02_1;
+package introduction.practice02.practice02_1;
 
 public class PrimitiveTypes {
     public static void main(String[] args) {

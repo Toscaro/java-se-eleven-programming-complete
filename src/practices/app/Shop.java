@@ -6,9 +6,9 @@
  * Vestibulum commodo. Ut rhoncus gravida arcu.
  */
 
-package practice04.app;
+package practices.app;
 
-import practice04.data.Product;
+import practices.data.Product;
 
 import java.math.BigDecimal;
 

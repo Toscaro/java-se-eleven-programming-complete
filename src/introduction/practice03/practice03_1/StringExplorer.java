@@ -1,4 +1,4 @@
-package practice03.practice03_1;
+package introduction.practice03.practice03_1;
 
 public class StringExplorer {
 
