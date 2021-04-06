@@ -35,6 +35,22 @@ public class Product {
     private int id;
     private String name;
     private BigDecimal price;
+    private Rating rating;
+
+    public Product() {
+        this(0, "no name", BigDecimal.ZERO);
+    }
+
+    public Product(int id, String name, BigDecimal price, Rating rating) {
+        this.id = id;
+        this.name = name;
+        this.price = price;
+        this.rating = rating;
+    }
+
+    public Product(int id, String name, BigDecimal price) {
+        this(id, name, price, Rating.NOT_RATED);
+    }
 
     public int getId() {
         return id;
@@ -68,12 +84,19 @@ public class Product {
      * @return a {@link BigDecimal BigDecimal} value of the discount
      */
     public BigDecimal getDiscount() {
-        BigDecimal discount = price.multiply(DISCOUNT_RATE).setScale(2, RoundingMode.HALF_UP);
-        return discount;
+        return price.multiply(DISCOUNT_RATE).setScale(2, RoundingMode.HALF_UP);
+    }
+
+    public Rating getRating() {
+        return rating;
+    }
+
+    public void setRating(Rating rating) {
+        this.rating = rating;
     }
 
     @Override
     public String toString() {
-        return getId() + " " + getName() + " " + getPrice() + " " + getDiscount();
+        return getId() + " " + getName() + " " + getPrice() + " " + getDiscount() + " " + getRating().getStars();
     }
 }
