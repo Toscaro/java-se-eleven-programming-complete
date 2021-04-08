@@ -10,6 +10,8 @@ package practices.data;
 
 import java.math.BigDecimal;
 import java.math.RoundingMode;
+import java.time.LocalDate;
+import java.util.Objects;
 
 /**
  * {@code Product} class represents properties and behaviours of
@@ -23,7 +25,7 @@ import java.math.RoundingMode;
  * @author Toscaro
  * @version 4.0
  */
-public class Product {
+public abstract class Product {
     /**
      * A constant that defines a
      * {@link BigDecimal BigDecimal} value of the discount rate
@@ -78,12 +80,36 @@ public class Product {
         return rating;
     }
 
-    public Product applyRating(Rating rating) {
-        return new Product(id, name, price, rating);
+    public abstract Product applyRating(Rating rating);
+
+    /**
+     * Get the value of the best before date for the product
+     *
+     * @return the value of bestBefore
+     */
+    public LocalDate getBestBefore() {
+        return LocalDate.now();
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) {
+            return true;
+        }
+        if (!(o instanceof Product)) {
+            return false;
+        }
+        Product product = (Product) o;
+        return id == product.id && Objects.equals(name, product.name);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(id);
     }
 
     @Override
     public String toString() {
-        return getId() + " " + getName() + " " + getPrice() + " " + getDiscount() + " " + getRating().getStars();
+        return id + ", " + name + ", " + price + ", " + getDiscount() + ", " + rating.getStars() + ", " + getBestBefore();
     }
 }
