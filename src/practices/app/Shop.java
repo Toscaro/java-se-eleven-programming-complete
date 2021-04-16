@@ -12,6 +12,7 @@ import practices.data.*;
 
 import java.math.BigDecimal;
 import java.time.LocalDate;
+import java.util.Locale;
 
 /**
  * {@code Shop} class represents an application that manages Products.
@@ -22,7 +23,7 @@ import java.time.LocalDate;
 public class Shop {
 
     public static void main(String[] args) {
-        ProductManager productManager = new ProductManager();
+        ProductManager productManager = new ProductManager(); //Will be fixed on practice 07_3
         Product p1 = productManager.createProduct(101, "Tea", BigDecimal.valueOf(1.99), Rating.THREE_STAR);
         Product p2 = productManager.createProduct(102, "Coffee", BigDecimal.valueOf(1.99), Rating.FOUR_STAR);
         Product p3 = productManager.createProduct(103, "Cake", BigDecimal.valueOf(3.99), Rating.FIVE_STAR, LocalDate.now().plusDays(2));
