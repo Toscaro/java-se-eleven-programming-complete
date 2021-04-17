@@ -29,6 +29,11 @@ public class Shop {
         final Product p1 = productManager.createProduct(101, "Tea", BigDecimal.valueOf(1.99), Rating.NOT_RATED);
         productManager.printProductReport();
         productManager.reviewProduct(p1, Rating.FOUR_STAR, "Nice hot cup of tea");
+        productManager.reviewProduct(p1, Rating.TWO_STAR, "Rather weak tea");
+        productManager.reviewProduct(p1, Rating.FOUR_STAR, "Fine tea");
+        productManager.reviewProduct(p1, Rating.FOUR_STAR, "Good tea");
+        productManager.reviewProduct(p1, Rating.FIVE_STAR, "Perfect tea");
+        productManager.reviewProduct(p1, Rating.THREE_STAR, "Just add some lemon");
         productManager.printProductReport();
 
 
