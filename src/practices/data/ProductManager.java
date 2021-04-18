@@ -44,6 +44,10 @@ public class ProductManager {
         return product;
     }
 
+    public Product reviewProduct(int id, Rating rating, String comments) {
+        return reviewProduct(findProduct(id), rating, comments);
+    }
+
     public Product reviewProduct(Product product, Rating rating, String comments) {
         final List<Review> reviews = products.get(product);
         // Product object is immutable when applying rating, so we have to remove it, apply rating and adding the new object again.
@@ -60,6 +64,21 @@ public class ProductManager {
         return product;
     }
 
+    public Product findProduct(int id) {
+        Product result = null;
+        for (Product product : products.keySet()) {
+            if (product.getId() == id) {
+                result = product;
+                break;
+            }
+        }
+        return result;
+    }
+
+    public void printProductReport(int id) {
+            printProductReport(findProduct(id));
+    }
+
     public void printProductReport(Product product) {
         final StringBuilder txt = new StringBuilder();
         txt.append(MessageFormat.format(resources.getString("product"),
@@ -70,7 +89,8 @@ public class ProductManager {
         txt.append('\n');
 
         final List<Review> reviews = products.get(product);
-        for (Review review : reviews) {
+        Collections.sort(reviews);
+        for (final Review review : reviews) {
             if (review == null) {
                 break;
             }

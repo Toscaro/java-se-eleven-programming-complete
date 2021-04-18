@@ -99,7 +99,7 @@ public abstract class Product implements Rateable<Product> {
             return false;
         }
         Product product = (Product) o;
-        return id == product.id && Objects.equals(name, product.name);
+        return id == product.id;
     }
 
     @Override

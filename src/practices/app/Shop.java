@@ -26,20 +26,21 @@ public class Shop {
     public static void main(String[] args) {
         final ProductManager productManager = new ProductManager(Locale.UK);
 
-        Product p1 = productManager.createProduct(101, "Tea", BigDecimal.valueOf(1.99), Rating.NOT_RATED);
-        productManager.printProductReport(p1);
-        p1 = productManager.reviewProduct(p1, Rating.FOUR_STAR, "Nice hot cup of tea");
-        p1 = productManager.reviewProduct(p1, Rating.TWO_STAR, "Rather weak tea");
-        p1 = productManager.reviewProduct(p1, Rating.FOUR_STAR, "Fine tea");
-        p1 = productManager.reviewProduct(p1, Rating.FOUR_STAR, "Good tea");
-        p1 = productManager.reviewProduct(p1, Rating.FIVE_STAR, "Perfect tea");
-        p1 = productManager.reviewProduct(p1, Rating.THREE_STAR, "Just add some lemon");
-        productManager.printProductReport(p1);
+        productManager.createProduct(101, "Tea", BigDecimal.valueOf(1.99), Rating.NOT_RATED);
+        productManager.printProductReport(101);
 
-        Product p2 = productManager.createProduct(102, "Coffee", BigDecimal.valueOf(1.99), Rating.NOT_RATED);
-        p2 = productManager.reviewProduct(p2, Rating.THREE_STAR, "Coffee was ok");
-        p2 = productManager.reviewProduct(p2, Rating.ONE_STAR, "Where is the milk?!");
-        p2 = productManager.reviewProduct(p2, Rating.FIVE_STAR, "It's perfect with ten spoons of sugar");
-        productManager.printProductReport(p2);
+        productManager.reviewProduct(101, Rating.FOUR_STAR, "Nice hot cup of tea");
+        productManager.reviewProduct(101, Rating.TWO_STAR, "Rather weak tea");
+        productManager.reviewProduct(101, Rating.FOUR_STAR, "Fine tea");
+        productManager.reviewProduct(101, Rating.FOUR_STAR, "Good tea");
+        productManager.reviewProduct(101, Rating.FIVE_STAR, "Perfect tea");
+        productManager.reviewProduct(101, Rating.THREE_STAR, "Just add some lemon");
+        productManager.printProductReport(101);
+
+        productManager.createProduct(102, "Coffee", BigDecimal.valueOf(1.99), Rating.NOT_RATED);
+        productManager.reviewProduct(102, Rating.THREE_STAR, "Coffee was ok");
+        productManager.reviewProduct(102, Rating.ONE_STAR, "Where is the milk?!");
+        productManager.reviewProduct(102, Rating.FIVE_STAR, "It's perfect with ten spoons of sugar");
+        productManager.printProductReport(102);
     }
 }
