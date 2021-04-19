@@ -12,7 +12,9 @@ import practices.data.Product;
 import practices.data.ProductManager;
 import practices.data.Rating;
 
+import java.io.FilenameFilter;
 import java.math.BigDecimal;
+import java.util.Comparator;
 import java.util.Locale;
 
 /**
@@ -27,7 +29,7 @@ public class Shop {
         final ProductManager productManager = new ProductManager(Locale.CANADA_FRENCH);
 
         productManager.createProduct(101, "Tea", BigDecimal.valueOf(1.99), Rating.NOT_RATED);
-        productManager.printProductReport(101);
+//        productManager.printProductReport(101);
 
         productManager.reviewProduct(101, Rating.FOUR_STAR, "Nice hot cup of tea");
         productManager.reviewProduct(101, Rating.TWO_STAR, "Rather weak tea");
@@ -35,13 +37,21 @@ public class Shop {
         productManager.reviewProduct(101, Rating.FOUR_STAR, "Good tea");
         productManager.reviewProduct(101, Rating.FIVE_STAR, "Perfect tea");
         productManager.reviewProduct(101, Rating.THREE_STAR, "Just add some lemon");
-        productManager.printProductReport(101);
+//        productManager.printProductReport(101);
 
-        productManager.changeLocale(Locale.US.toLanguageTag());
-        productManager.createProduct(102, "Coffee", BigDecimal.valueOf(1.99), Rating.NOT_RATED);
+//        productManager.changeLocale(Locale.US.toLanguageTag());
+        productManager.createProduct(102, "Coffee", BigDecimal.valueOf(2.99), Rating.NOT_RATED);
         productManager.reviewProduct(102, Rating.THREE_STAR, "Coffee was ok");
         productManager.reviewProduct(102, Rating.ONE_STAR, "Where is the milk?!");
         productManager.reviewProduct(102, Rating.FIVE_STAR, "It's perfect with ten spoons of sugar");
-        productManager.printProductReport(102);
+//        productManager.printProductReport(102);
+
+        Comparator<Product> ratingSorter = (p1, p2) -> p2.getRating().ordinal() - p1.getRating().ordinal();
+        Comparator<Product> priceSorter = (p1, p2) -> p2.getPrice().compareTo(p1.getPrice());
+        productManager.printProducts(ratingSorter);
+        productManager.printProducts(priceSorter);
+
+        productManager.printProducts(ratingSorter.thenComparing(priceSorter));
+        productManager.printProducts(ratingSorter.thenComparing(priceSorter).reversed());
     }
 }

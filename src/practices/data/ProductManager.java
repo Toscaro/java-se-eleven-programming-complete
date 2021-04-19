@@ -8,6 +8,7 @@
 
 package practices.data;
 
+import javax.swing.*;
 import java.math.BigDecimal;
 import java.text.MessageFormat;
 import java.text.NumberFormat;
@@ -107,6 +108,17 @@ public class ProductManager {
         }
         if (reviews.isEmpty()) {
             txt.append(formatter.getText("no.reviews"));
+            txt.append('\n');
+        }
+        System.out.println(txt);
+    }
+
+    public void printProducts(Comparator<Product> sorter) {
+        List<Product> productList = new ArrayList<>(products.keySet());
+        productList.sort(sorter);
+        StringBuilder txt = new StringBuilder();
+        for (Product product : productList) {
+            txt.append(formatter.formatProduct(product));
             txt.append('\n');
         }
         System.out.println(txt);
