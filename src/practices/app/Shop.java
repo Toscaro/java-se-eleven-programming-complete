@@ -24,7 +24,7 @@ import java.util.Locale;
 public class Shop {
 
     public static void main(String[] args) {
-        final ProductManager productManager = new ProductManager(Locale.UK);
+        final ProductManager productManager = new ProductManager(Locale.CANADA_FRENCH);
 
         productManager.createProduct(101, "Tea", BigDecimal.valueOf(1.99), Rating.NOT_RATED);
         productManager.printProductReport(101);
@@ -37,6 +37,7 @@ public class Shop {
         productManager.reviewProduct(101, Rating.THREE_STAR, "Just add some lemon");
         productManager.printProductReport(101);
 
+        productManager.changeLocale(Locale.US.toLanguageTag());
         productManager.createProduct(102, "Coffee", BigDecimal.valueOf(1.99), Rating.NOT_RATED);
         productManager.reviewProduct(102, Rating.THREE_STAR, "Coffee was ok");
         productManager.reviewProduct(102, Rating.ONE_STAR, "Where is the milk?!");

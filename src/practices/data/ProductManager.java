@@ -19,17 +19,29 @@ import java.util.*;
 public class ProductManager {
 
     private Map<Product, List<Review>> products = new HashMap<>();
+    private ResourceFormatter formatter;
 
-    private Locale locale;
-    private ResourceBundle resources;
-    private DateTimeFormatter dateFormat;
-    private NumberFormat moneyFormat;
+    private static Map<String, ResourceFormatter> formatters = Map.of(
+            "pt-BR", new ResourceFormatter(new Locale("pt", "BR")),
+            "en-US", new ResourceFormatter(Locale.US),
+            "fr-CA", new ResourceFormatter(Locale.CANADA_FRENCH),
+            "en-CA", new ResourceFormatter(Locale.CANADA)
+    );
 
     public ProductManager(Locale locale) {
-        this.locale = locale;
-        this.resources = ResourceBundle.getBundle("practices.data.resources", locale);
-        this.dateFormat = DateTimeFormatter.ofLocalizedDate(FormatStyle.SHORT).localizedBy(locale);
-        this.moneyFormat = NumberFormat.getCurrencyInstance(locale);
+        this(locale.toLanguageTag());
+    }
+
+    public ProductManager(String languageTag) {
+        changeLocale(languageTag);
+    }
+
+    public void changeLocale(String languageTag) {
+        formatter = formatters.getOrDefault(languageTag, formatters.get("pt-BR"));
+    }
+
+    public static Set<String> getSupportedLocales() {
+        return formatters.keySet();
     }
 
     public Product createProduct(int id, String name, BigDecimal price, Rating rating, LocalDate bestBefore) {
@@ -76,16 +88,12 @@ public class ProductManager {
     }
 
     public void printProductReport(int id) {
-            printProductReport(findProduct(id));
+        printProductReport(findProduct(id));
     }
 
     public void printProductReport(Product product) {
         final StringBuilder txt = new StringBuilder();
-        txt.append(MessageFormat.format(resources.getString("product"),
-                product.getName(),
-                moneyFormat.format(product.getPrice()),
-                product.getRating().getStars(),
-                dateFormat.format(product.getBestBefore())));
+        txt.append(formatter.formatProduct(product));
         txt.append('\n');
 
         final List<Review> reviews = products.get(product);
@@ -94,15 +102,46 @@ public class ProductManager {
             if (review == null) {
                 break;
             }
-            txt.append(MessageFormat.format(resources.getString("review"),
-                    review.getRating().getStars(),
-                    review.getComments()));
+            txt.append(formatter.formatReview(review));
             txt.append('\n');
         }
         if (reviews.isEmpty()) {
-            txt.append(resources.getString("no.reviews"));
+            txt.append(formatter.getText("no.reviews"));
             txt.append('\n');
         }
         System.out.println(txt);
+    }
+
+    private static class ResourceFormatter {
+
+        private Locale locale;
+        private ResourceBundle resources;
+        private DateTimeFormatter dateFormat;
+        private NumberFormat moneyFormat;
+
+        public ResourceFormatter(Locale locale) {
+            this.locale = locale;
+            this.resources = ResourceBundle.getBundle("practices.data.resources", locale);
+            this.dateFormat = DateTimeFormatter.ofLocalizedDate(FormatStyle.SHORT).localizedBy(locale);
+            this.moneyFormat = NumberFormat.getCurrencyInstance(locale);
+        }
+
+        private String formatProduct(Product product) {
+            return MessageFormat.format(resources.getString("product"),
+                    product.getName(),
+                    moneyFormat.format(product.getPrice()),
+                    product.getRating().getStars(),
+                    dateFormat.format(product.getBestBefore()));
+        }
+
+        private String formatReview(Review review) {
+            return MessageFormat.format(resources.getString("review"),
+                    review.getRating().getStars(),
+                    review.getComments());
+        }
+
+        private String getText(String key) {
+            return resources.getString(key);
+        }
     }
 }
