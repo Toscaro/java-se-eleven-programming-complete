@@ -47,11 +47,11 @@ public class Shop {
 //        productManager.printProductReport(102);
 
         Comparator<Product> ratingSorter = (p1, p2) -> p2.getRating().ordinal() - p1.getRating().ordinal();
-        Comparator<Product> priceSorter = (p1, p2) -> p2.getPrice().compareTo(p1.getPrice());
-        productManager.printProducts(ratingSorter);
-        productManager.printProducts(priceSorter);
+//        Comparator<Product> priceSorter = (p1, p2) -> p2.getPrice().compareTo(p1.getPrice());
+        productManager.printProducts(product -> product.getPrice().floatValue() < 2, ratingSorter);
+//        productManager.printProducts(priceSorter);
 
-        productManager.printProducts(ratingSorter.thenComparing(priceSorter));
-        productManager.printProducts(ratingSorter.thenComparing(priceSorter).reversed());
+//        productManager.printProducts(ratingSorter.thenComparing(priceSorter));
+//        productManager.printProducts(ratingSorter.thenComparing(priceSorter).reversed());
     }
 }
