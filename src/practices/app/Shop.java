@@ -12,8 +12,8 @@ import practices.data.Product;
 import practices.data.ProductManager;
 import practices.data.Rating;
 
-import java.io.FilenameFilter;
 import java.math.BigDecimal;
+import java.time.LocalDate;
 import java.util.Comparator;
 import java.util.Locale;
 
@@ -46,6 +46,17 @@ public class Shop {
         productManager.reviewProduct(102, Rating.FIVE_STAR, "It's perfect with ten spoons of sugar");
 //        productManager.printProductReport(102);
 
+        productManager.createProduct(103, "Cake", BigDecimal.valueOf(3.99), Rating.NOT_RATED, LocalDate.now().plusDays(2));
+        productManager.reviewProduct(103, Rating.ONE_STAR, "Cake was not so good");
+        productManager.reviewProduct(103, Rating.ONE_STAR, "Cake was not so good");
+        productManager.reviewProduct(103, Rating.ONE_STAR, "Cake was not so good");
+        productManager.reviewProduct(103, Rating.ONE_STAR, "Cake was not so good");
+        productManager.reviewProduct(103, Rating.ONE_STAR, "Cake was not so good");
+        productManager.reviewProduct(103, Rating.TWO_STAR, "Too sweet");
+        productManager.reviewProduct(103, Rating.FIVE_STAR, "It's perfect!");
+
+
+        productManager.getDiscount().forEach((rating, discount) -> System.out.println(rating + "\t" + discount));
         Comparator<Product> ratingSorter = (p1, p2) -> p2.getRating().ordinal() - p1.getRating().ordinal();
 //        Comparator<Product> priceSorter = (p1, p2) -> p2.getPrice().compareTo(p1.getPrice());
         productManager.printProducts(product -> product.getPrice().floatValue() < 2, ratingSorter);
